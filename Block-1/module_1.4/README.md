@@ -1,61 +1,60 @@
-# 📂 Module 1.4: Redirection, Piping, Searching & Text Analysis
+# Module 1.4: Redirection, Piping, Searching & Text Analysis
 
 ---
 
-## 1. I/O Redirection (আউটপুট সেভ ও এরর লুকানো)
-
-* **`>` (Overwrite):** আগের লেখা পুরো মুছে নতুন লেখা সেভ করে।
+## 1. I/O Redirection
+* **`>` (Overwrite):** Redirects output and overwrites the file.
   ```bash
   echo "Hello World" > output.txt
->> (Append): আগের লেখা অক্ষত রেখে নিচে নতুন লাইন যোগ করে।
+>> (Append): Appends output to the end of the file.
 
 Bash
 echo "New Line" >> output.txt
-2> /dev/null (এরর লুকানো): অপ্রয়োজনীয় এরর লিনাক্সের ময়লার ঝুড়িতে পাঠিয়ে স্ক্রিন পরিষ্কার রাখে।
+2> /dev/null (Suppress Errors): Discards error messages.
 
 Bash
 ls non_existent_folder 2> /dev/null
 2. Piping (|)
-কাজ: বাম পাশের কমান্ডের আউটপুটকে সোজা ডান পাশের কমান্ডের ইনপুট হিসেবে পাঠিয়ে দেওয়া।
+Purpose: Passes the output of one command as input to another.
 
-উদাহরণ:
+Example:
 
 Bash
 cat /etc/passwd | grep root
-3. ফাইল পড়া ও লাইভ নজরদারি
-head: ফাইলের শুরুর ১০টি লাইন দেখায়।
+3. Reading Files & Live Tracking
+head: Displays the first 10 lines of a file.
 
-tail: ফাইলের শেষ ১০টি লাইন দেখায়।
+tail: Displays the last 10 lines of a file.
 
-tail -f (Live Tracking): ফাইলে নতুন কিছু যুক্ত হলে সিসিটিভি ক্যামেরার মতো লাইভ দেখে।
+tail -f (Live Monitoring): Tracks file changes in real-time.
 
 Bash
-tail -f /var/log/syslog
-4. টেক্সট সার্চিং (grep)
--i: বড় হাত/ছোট হাতের পার্থক্য করবে না (Case Insensitive)।
+tail -f my_log.txt
+4. Text Searching (grep)
+-i: Case-insensitive search.
 
--v: যেটা খুঁজছেন সেটা বাদ দিয়ে বাকি সব লাইন দেখাবে (Invert Match)।
+-v: Invert match (shows non-matching lines).
 
--n: লাইন নম্বরসহ দেখাবে।
+-n: Displays line numbers.
 
 Bash
 grep -i "password" test_search.txt
 grep -v "apple" test_search.txt
-5. ফাইল খোঁজা (find)
-নাম দিয়ে খোঁজা: find . -name "*.txt"
+5. File Searching (find)
+By Name: find . -name "*.txt"
 
-ফাইল টাইপ দিয়ে: find . -type f -name "*.txt"
+By Type: find . -type f -name "*.txt"
 
-SUID ফাইল খোঁজা (Privilege Escalation):
+SUID Files (Privilege Escalation):
 
 Bash
 find / -perm -4000 2>/dev/null
-6. টেক্সট প্রসেসিং (wc, sort, uniq, cut)
-wc -l: মোট লাইন গণনা করে।
+6. Text Processing (wc, sort, uniq, cut)
+wc -l: Counts line numbers.
 
-sort | uniq: সাজিয়ে একই লাইন বারবার থাকলে ডুপ্লিকেট বাদ দেয়।
+sort | uniq: Sorts lines and removes duplicates.
 
-cut: নির্দিষ্ট অংশ কেটে বের করে।
+cut: Extracts specific fields/columns.
 
 Bash
 cut -d ":" -f 1 /etc/passwd
