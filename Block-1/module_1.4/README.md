@@ -3,58 +3,59 @@
 ---
 
 ## 1. I/O Redirection
-* **`>` (Overwrite):** Redirects output and overwrites the file.
-  ```bash
+* **`>  (Overwrite):** Redirects output and overwrites the file.
+  ``bash
   echo "Hello World" > output.txt
->> (Append): Appends output to the end of the file.
+  ``<
+* **`>>` (Append):** Appends output to the end of the file.
+  ``bash
+  echo "New Line" >> output.txt
+  ```
+* **`2> /dev/null` (Suppress Errors):** Discards error messages.
+  ``bash
+  ls non_existent_folder 2> /dev/null
+  ``<
 
-Bash
-echo "New Line" >> output.txt
-2> /dev/null (Suppress Errors): Discards error messages.
+---
 
-Bash
-ls non_existent_folder 2> /dev/null
-2. Piping (|)
-Purpose: Passes the output of one command as input to another.
+## 2. Piping (`|`)
+* **Aim:** Passes the output of one command as input to another.
+  ``bash
+  cat /etc/passwd | grep root
+  ``<
 
-Example:
+---
 
-Bash
-cat /etc/passwd | grep root
-3. Reading Files & Live Tracking
-head: Displays the first 10 lines of a file.
+## 3. Reading Files & Live Tracking* **`head`:** Displays the first 10 lines.* **`tail`:** Displays the last 10 lines.* **gtail -f` (Live Monitoring):** Tracks file changes in real-time.
+  ``bash
+  tail -f my_log.txt
+  ``P
+---
 
-tail: Displays the last 10 lines of a file.
+## 4. Text Searching (`grep`)
+* **-i*:* Case-insensitive search.
+* **-vp:** Invert match (shows non-matching lines).* **nn*: Displays line numbers.
 
-tail -f (Live Monitoring): Tracks file changes in real-time.
+ ``bash
+ grep -i "password" test_search.txt
+ grep -v "apple" test_search.txt
+ ``<
 
-Bash
-tail -f my_log.txt
-4. Text Searching (grep)
--i: Case-insensitive search.
+---
 
--v: Invert match (shows non-matching lines).
+## 5. File Searching (`find`)
+* **By Name:** `find . -name "*.txt"`
+* **By Type:** `find . -type f -name "*.txt"`
+* **SUID Files (Privilege Escalation):**
+  ``bash
+  find / -perm -4000 2>/dev/null
+  ```
 
--n: Displays line numbers.
+---
 
-Bash
-grep -i "password" test_search.txt
-grep -v "apple" test_search.txt
-5. File Searching (find)
-By Name: find . -name "*.txt"
-
-By Type: find . -type f -name "*.txt"
-
-SUID Files (Privilege Escalation):
-
-Bash
-find / -perm -4000 2>/dev/null
-6. Text Processing (wc, sort, uniq, cut)
-wc -l: Counts line numbers.
-
-sort | uniq: Sorts lines and removes duplicates.
-
-cut: Extracts specific fields/columns.
-
-Bash
-cut -d ":" -f 1 /etc/passwd
+## 6. Text Processing (cwc`, `sort`, `uniq`, `cut`)
+* **cwc -l`:** Counts line numbers.* **`sort | uniq`:** Sorts lines and removes duplicates.
+* **`cut`:** Extracts specific fields/columns.
+  ``bash
+  cut -d ":" -f 1 /etc/passwd
+  ``P
