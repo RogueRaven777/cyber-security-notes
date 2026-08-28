@@ -1,9 +1,8 @@
 #!/bin/bash
 
-# System Variable & User Input Practice
-echo "=== Welcome to Bash Scripting ==="
-echo "Current User: $USER"
-echo "Current Directory: $PWD"
-
-read -p "Enter Target Domain/IP: " target
-echo "Targeting: $target"
+ping -c 4 google.com
+if [ $? -eq 0 ];then
+	echo "Server is UP"
+else
+	echo "Server is Down"
+fi
